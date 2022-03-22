@@ -1,7 +1,6 @@
 ﻿using System;
 
-namespace Ducks
-{
+namespace Ducks.Ducks { 
 	public abstract class Duck {
 
     // Maintain references to the each behavior interface:
@@ -23,6 +22,20 @@ namespace Ducks
     public void PerformQuack() {
       quackBehavior.QuackBehavior();
     }
+
+
+    //-------------------------------------------------------------------------
+    // Call this method anytime we want to change fly behavior dynamically.
+    public void SetFlyBehavior(IFlyBehavior fb) {
+      flyBehavior = fb;
+    }
+
+    //-------------------------------------------------------------------------
+    // Call this method anytime we want to change quack behavior dynamically.
+    public void SetQuackBehavior(IQuackBehavior qb) {
+      quackBehavior = qb;
+    }
+
 
     //-------------------------------------------------------------------------
     public void Swim() {

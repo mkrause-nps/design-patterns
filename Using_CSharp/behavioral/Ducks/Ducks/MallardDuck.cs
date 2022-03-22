@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Ducks {
+namespace Ducks.Ducks {
 	public class MallardDuck : Duck {
 		public MallardDuck() {
       quackBehavior = new Quack();
