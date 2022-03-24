@@ -32,20 +32,28 @@ class ChocolateBoiler(metaclass=Singleton):
 
     def fill(self):
         if not self.empty:
-            raise SingletonError
+            print("Can't fill - boiler not empty!")
+            #raise SingletonError
         self.empty = False
         self.boiled = False
-        print("Full")
-
-    def drain(self):
-        if self.empty or (not self.boiled):
-            raise SingletonError
-        self.empty = True
-        print("Empty!")
+        print("Filling boiler")
 
     def boil(self):
-        self.boiled = True
-        print("Boiled!")
+        if not self.empty and not self.boiled:
+            print("Boiling mixture")
+            self.boiled = True
+            self.empty = False
+        else:
+            print("Empty or boiled already.")
+
+    def drain(self):
+        if not self.empty and self.boiled:
+            #raise SingletonError
+            self.empty = True
+            self.boiled = False
+            print("Draining boiler")
+        else:
+            print("Won't drain: either empty or not yet boiled...")
 
     def is_empty(self):
         return self.empty
@@ -59,10 +67,15 @@ def chocolate_controller() -> None:
     boiler = ChocolateBoiler()
     print(f"Instance dictionary in Singleton has {len(Singleton._instances.keys())} instance")
     boiler.fill()
-    boiler.boil()
-    # Try to create a second instance of a singleton:
+    print("\n")
+
+    print("Trying to create a second instance of a singleton:")
     boiler2 = ChocolateBoiler()
-    boiler.drain()
+    boiler2.drain()
+
+    boiler.boil()
+    boiler2.drain()
+
     print(f'Is boiler2 an instance: {boiler2 is boiler}')
     print(f"Instance dictionary in Singleton has {len(Singleton._instances.keys())} instance")
 
